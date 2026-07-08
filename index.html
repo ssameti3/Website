@@ -55,7 +55,7 @@ h1 span{color:var(--teal-lt)}
 /* ABOUT */
 #about{background:var(--dark)}
 .about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:3rem;align-items:start}
-.about-text p{color:var(--text-mid);font-size:.95rem;line-height:1.85;margin-bottom:1.1rem;font-weight:300}
+.about-text p{color:var(--text);font-size:.95rem;line-height:1.85;margin-bottom:1.1rem;font-weight:500}
 .about-text p strong{color:var(--text);font-weight:500}
 .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
 .stat-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.25rem}
@@ -83,7 +83,7 @@ h1 span{color:var(--teal-lt)}
 .career-card:hover{border-color:var(--teal-line);transform:translateY(-3px)}
 .career-icon{font-size:22px;margin-bottom:.85rem}
 .career-title{font-size:.95rem;font-weight:500;color:var(--text);margin-bottom:.5rem}
-.career-desc{font-size:.82rem;color:var(--text-mid);line-height:1.65;font-weight:300}
+.career-desc{font-size:.92rem;color:var(--text);line-height:1.65;font-weight:500}
 .career-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.85rem}
 
 /* PROJECTS */
@@ -121,8 +121,13 @@ h1 span{color:var(--teal-lt)}
 .exp-company{font-size:.82rem;color:var(--teal-lt);margin-bottom:.12rem}
 .exp-dates{font-family:var(--mono);font-size:.72rem;color:var(--text-dim);margin-bottom:.35rem}
 .exp-desc{font-size:.8rem;color:var(--text);line-height:1.6;font-weight:500}
+.exp-bullets{margin:.4rem 0 0;padding-left:1.05rem;list-style:disc}
+.exp-bullets li{font-size:.8rem;color:var(--text);line-height:1.6;font-weight:500;margin-bottom:.45rem}
+.exp-bullets li::marker{color:var(--teal-lt)}
+.resume-award{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.85rem 1rem;font-size:.85rem;color:var(--text);font-weight:500}
+.resume-award strong{color:var(--teal-lt)}
 .skills-wrap{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1.5rem}
-.skill-chip{font-family:var(--mono);font-size:10px;padding:3px 9px;border-radius:4px;background:var(--card);border:1px solid var(--border);color:var(--text-mid)}
+.skill-chip{font-family:var(--mono);font-size:10px;padding:3px 9px;border-radius:4px;background:var(--card);border:1px solid var(--border);color:var(--text);font-weight:500}
 .resume-dl{text-align:center;padding:2rem;background:var(--card);border:1px dashed var(--teal-line);border-radius:12px}
 .resume-dl p{font-size:.85rem;color:var(--text-mid);margin-bottom:1rem;font-weight:300}
 
@@ -478,47 +483,88 @@ footer{padding:1.75rem 5vw;border-top:1px solid var(--border);display:flex;align
           <div class="exp-title">Principal Data Analyst</div>
           <div class="exp-company">Atlanta Regional Commission</div>
           <div class="exp-dates">Nov 2022 – Present</div>
-          <div class="exp-desc">Lead enterprise analytics across a 21-county metro region. ARC's primary emission modeler (EPA MOVES). Deployed ML forecasting models and built ABMVIZ and ODMAP production platforms cited by the Transportation Research Board.</div>
+          <ul class="exp-bullets">
+            <li>Lead enterprise-scale analytics initiatives and Activity-Based Model (ABM) data integration efforts supporting operational performance monitoring, forecasting, scenario evaluation, and executive decision-making across a 21-county region.</li>
+            <li>Design and maintain integrated analytical data environments combining transportation, mobility, demographic, and socioeconomic datasets to support forecasting, reporting, and decision-support applications.</li>
+            <li>Develop and automate scalable SQL, PostgreSQL, and Python workflows to ingest, transform, validate, and standardize large-scale datasets from public, commercial, and internal sources.</li>
+            <li>Design and develop enterprise analytics platforms integrating ABM outputs with internal and external datasets to support operational analysis, forecasting, and scenario comparison.</li>
+            <li>Design and implement interactive dashboards, geospatial applications, and decision-support tools using Python, SQL, ArcGIS Online, D3.js, Leaflet, JavaScript, and ArcGIS Experience Builder.</li>
+            <li>Lead stakeholder engagement through the ARC Model Users Group (MUG), promoting adoption of analytical tools, best practices, and data-driven decision making.</li>
+            <li>Developed predictive analytics and machine learning models in Python to support forecasting, trend analysis, scenario evaluation, and data-driven decision-making.</li>
+          </ul>
         </div>
         <div class="exp-item">
           <div class="exp-title">Transportation Analyst</div>
           <div class="exp-company">HNTB & MARTA</div>
           <div class="exp-dates">Oct 2019 – Nov 2022</div>
-          <div class="exp-desc">Delivered operational analytics, BI dashboards, and GIS applications supporting transit operations, asset management, and service reliability across Atlanta's transit network.</div>
+          <ul class="exp-bullets">
+            <li>Delivered analytics, data integration, and operational improvement solutions supporting transit operations, infrastructure evaluation, asset management, and service reliability across the MARTA service area.</li>
+            <li>Developed GIS-based applications, interactive dashboards, and analytical tools to support field operations, asset inventories, inspection programs, and operational data collection workflows.</li>
+            <li>Designed and automated reporting, visualization, and dashboard workflows using ArcGIS, Power BI, Excel, and GIS technologies, improving reporting efficiency and stakeholder access.</li>
+            <li>Produced executive-level dashboards, reports, maps, and analytical presentations for leadership teams, technical committees, and business stakeholders.</li>
+            <li>Leveraged operational and ridership datasets to monitor key performance indicators and support data-driven recommendations for service and infrastructure planning.</li>
+          </ul>
+        </div>
+        <h3 style="margin-top:1.5rem">Key Projects</h3>
+        <div class="exp-item">
+          <div class="exp-title">ABMVIZ</div>
+          <div class="exp-dates">Spring 2026</div>
+          <ul class="exp-bullets">
+            <li>Enterprise-scale analytics platform integrating millions of Activity-Based Model trip records to support operational analysis, forecasting, and scenario evaluation across Metro Atlanta.</li>
+            <li>Interactive dashboards and geospatial analytics tools enabling comparative analysis of travel demand, origin-destination patterns, and system performance across multiple planning horizons.</li>
+          </ul>
+        </div>
+        <div class="exp-item">
+          <div class="exp-title">ODMAP</div>
+          <div class="exp-dates">Fall 2025</div>
+          <ul class="exp-bullets">
+            <li>Enterprise-scale platform integrating six major transportation and mobility datasets — INRIX, Replica, LODES, CTPP, NextGen NHTS, and Teralytics — into a unified analytical environment.</li>
+            <li>Standardized heterogeneous datasets with differing spatial, temporal, and schema structures to enable cross-dataset analysis and scalable reporting.</li>
+          </ul>
+        </div>
+        <div class="exp-item">
+          <div class="exp-title">NexGEN NHTS Local Add-On</div>
+          <div class="exp-dates">Spring 2024</div>
+          <ul class="exp-bullets">
+            <li>Interactive analytics platform built with ArcGIS Experience Builder to support travel behavior insights, forecasting, and data-driven decision-making.</li>
+            <li>Processed block group-to-block group trip datasets into scalable analytical structures and county-level origin-destination tables.</li>
+          </ul>
         </div>
         <h3 style="margin-top:1.5rem">Education</h3>
         <div class="exp-item">
           <div class="exp-title">MS in Analytics</div>
-          <div class="exp-company">Georgia Institute of Technology</div>
-          <div class="exp-dates">May 2026 · Top-5 Nationally Ranked</div>
+          <div class="exp-company">Georgia Institute of Technology · Computing Track</div>
+          <div class="exp-dates">Aug 2023 – May 2026 · Top-5 Nationally Ranked</div>
         </div>
         <div class="exp-item">
           <div class="exp-title">Master of Urban Planning</div>
-          <div class="exp-company">Texas A&M University</div>
-          <div class="exp-dates">May 2019 · APA Outstanding Student Award</div>
+          <div class="exp-company">Texas A&M University · Transportation Planning & Geospatial Certificates</div>
+          <div class="exp-dates">Aug 2017 – May 2019 · APA Outstanding Student Award</div>
         </div>
         <div class="exp-item">
           <div class="exp-title">Bachelor of Urban Planning</div>
           <div class="exp-company">Azad University</div>
-          <div class="exp-dates">Feb 2016</div>
+          <div class="exp-dates">Sep 2011 – Feb 2016</div>
         </div>
+        <h3 style="margin-top:1.5rem">Awards</h3>
+        <div class="resume-award">2019 American Planning Association — <strong>Outstanding Student</strong></div>
       </div>
       <div class="resume-col">
         <h3>Transportation Modeling</h3>
         <div class="skills-wrap">
-          <span class="skill-chip">Activity-Based Modeling</span><span class="skill-chip">Travel Demand Modeling</span><span class="skill-chip">EPA MOVES</span><span class="skill-chip">Emissions Analysis</span><span class="skill-chip">TAZ-Level Analysis</span><span class="skill-chip">Transportation Conformity</span>
+          <span class="skill-chip">Activity-Based Modeling</span><span class="skill-chip">Travel Demand Modeling</span><span class="skill-chip">EPA MOVES</span><span class="skill-chip">Emissions Analysis</span><span class="skill-chip">TAZ-Level Analysis</span><span class="skill-chip">Transportation Conformity</span><span class="skill-chip">Origin-Destination Analysis</span><span class="skill-chip">Transportation Performance Evaluation</span>
         </div>
         <h3>AI & Machine Learning</h3>
         <div class="skills-wrap">
-          <span class="skill-chip">Python</span><span class="skill-chip">R</span><span class="skill-chip">scikit-learn</span><span class="skill-chip">LSTM</span><span class="skill-chip">Random Forest</span><span class="skill-chip">SARIMA</span><span class="skill-chip">K-Means</span><span class="skill-chip">Bayesian Hierarchical</span><span class="skill-chip">Forecasting</span><span class="skill-chip">Predictive Analytics</span>
+          <span class="skill-chip">Python</span><span class="skill-chip">R</span><span class="skill-chip">scikit-learn</span><span class="skill-chip">LSTM</span><span class="skill-chip">Random Forest</span><span class="skill-chip">SARIMA</span><span class="skill-chip">K-Means</span><span class="skill-chip">Bayesian Hierarchical</span><span class="skill-chip">Forecasting</span><span class="skill-chip">Predictive Analytics</span><span class="skill-chip">Scenario Analysis</span><span class="skill-chip">Decision Support Analytics</span>
         </div>
-        <h3>Data Engineering & DevOps</h3>
+        <h3>Data Architecture & Engineering</h3>
         <div class="skills-wrap">
-          <span class="skill-chip">SQL</span><span class="skill-chip">PostgreSQL</span><span class="skill-chip">Apache Spark</span><span class="skill-chip">Databricks</span><span class="skill-chip">Docker</span><span class="skill-chip">Git</span><span class="skill-chip">GitHub</span><span class="skill-chip">ETL Pipelines</span><span class="skill-chip">REST API</span><span class="skill-chip">Linux</span>
+          <span class="skill-chip">SQL</span><span class="skill-chip">PostgreSQL</span><span class="skill-chip">SQL Server</span><span class="skill-chip">Apache Spark</span><span class="skill-chip">Databricks</span><span class="skill-chip">Docker</span><span class="skill-chip">Git</span><span class="skill-chip">GitHub</span><span class="skill-chip">ETL Pipelines</span><span class="skill-chip">REST API</span><span class="skill-chip">Linux</span><span class="skill-chip">Data Modeling</span><span class="skill-chip">Relational Database Design</span><span class="skill-chip">ERDs</span><span class="skill-chip">Dimensional Modeling</span><span class="skill-chip">Data Warehousing</span>
         </div>
         <h3>Visualization & GIS</h3>
         <div class="skills-wrap">
-          <span class="skill-chip">Power BI</span><span class="skill-chip">Tableau</span><span class="skill-chip">D3.js</span><span class="skill-chip">Leaflet</span><span class="skill-chip">ArcGIS Pro</span><span class="skill-chip">PostGIS</span><span class="skill-chip">QGIS</span><span class="skill-chip">Hexagon Grid Analysis</span>
+          <span class="skill-chip">Power BI</span><span class="skill-chip">Tableau</span><span class="skill-chip">D3.js</span><span class="skill-chip">Leaflet</span><span class="skill-chip">ArcGIS Pro</span><span class="skill-chip">ArcMap</span><span class="skill-chip">ArcGIS Online</span><span class="skill-chip">ArcGIS Experience Builder</span><span class="skill-chip">PostGIS</span><span class="skill-chip">QGIS</span><span class="skill-chip">Hexagon Grid Analysis</span><span class="skill-chip">Network Analysis</span><span class="skill-chip">Data Storytelling</span>
         </div>
       </div>
     </div>
