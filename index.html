@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soheil Sameti — Applied Data Scientist</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap');
+
+:root {
+  --teal:#1F7A8C; --teal-lt:#2A9DB4; --teal-dim:rgba(31,122,140,.12); --teal-line:rgba(31,122,140,.22);
+  --dark:#0E1418; --mid:#162028; --card:#1A2830; --border:rgba(255,255,255,.07);
+  --text:#E8EDF0; --text-mid:#8FA4AE; --text-dim:#4A6272;
+  --sans:'DM Sans',sans-serif; --mono:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--dark);color:var(--text);line-height:1.6;font-size:15px;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:58px;background:rgba(14,20,24,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:var(--mono);font-size:12px;color:var(--teal);letter-spacing:.1em;text-decoration:none}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:12px;color:var(--text-mid);text-decoration:none;letter-spacing:.05em;transition:color .2s}
+.nav-links a:hover{color:var(--teal-lt)}
+
+/* SHARED */
+section{padding:90px 5vw}
+.inner{max-width:980px;margin:0 auto}
+.eyebrow{font-family:var(--mono);font-size:11px;color:var(--teal);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:.6rem}
+.eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--teal)}
+h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:600;letter-spacing:-.02em;margin-bottom:2.5rem;color:var(--text)}
+hr.div{border:none;border-top:1px solid var(--border);margin:0}
+.tag{font-family:var(--mono);font-size:10px;padding:3px 9px;border-radius:4px;border:1px solid var(--teal-line);color:var(--teal-lt);background:var(--teal-dim)}
+.btn-primary{display:inline-block;padding:10px 22px;background:var(--teal);color:#fff;border:none;border-radius:6px;font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .2s,transform .15s}
+.btn-primary:hover{background:var(--teal-lt);transform:translateY(-1px)}
+.btn-outline{display:inline-block;padding:10px 22px;background:transparent;color:var(--teal-lt);border:1px solid var(--teal-line);border-radius:6px;font-family:var(--sans);font-size:13px;font-weight:500;text-decoration:none;transition:all .2s}
+.btn-outline:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-1px)}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;padding:80px 5vw 60px;position:relative;overflow:hidden}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--teal-line) 1px,transparent 1px),linear-gradient(90deg,var(--teal-line) 1px,transparent 1px);background-size:60px 60px;opacity:.16;mask-image:radial-gradient(ellipse 80% 60% at 50% 50%,black 30%,transparent 100%)}
+.hero-inner{max-width:780px;position:relative;z-index:1}
+h1{font-size:clamp(2.6rem,7vw,4.6rem);font-weight:600;letter-spacing:-.03em;line-height:1.08;margin-bottom:1.25rem}
+h1 span{color:var(--teal-lt)}
+.hero-sub{font-size:1.05rem;color:var(--text-mid);max-width:580px;margin-bottom:2rem;font-weight:300;line-height:1.75}
+.hero-tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:2.5rem}
+.hero-cta{display:flex;gap:1rem;flex-wrap:wrap}
+.hero-photo{position:absolute;right:5vw;top:50%;transform:translateY(-50%);width:200px;height:200px;border-radius:50%;border:2px solid var(--teal-line);background:var(--card);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-direction:column;gap:8px}
+.hero-photo svg{opacity:.3}
+.hero-photo span{font-size:11px;color:var(--text-dim);font-family:var(--mono);text-align:center;padding:0 1rem}
+
+/* ABOUT */
+#about{background:var(--dark)}
+.about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:3rem;align-items:start}
+.about-text p{color:var(--text-mid);font-size:.95rem;line-height:1.85;margin-bottom:1.1rem;font-weight:300}
+.about-text p strong{color:var(--text);font-weight:500}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.25rem}
+.stat-num{font-size:1.75rem;font-weight:600;color:var(--teal-lt);letter-spacing:-.02em;line-height:1;margin-bottom:.2rem}
+.stat-label{font-size:.75rem;color:var(--text-dim);font-family:var(--mono);letter-spacing:.04em}
+
+/* GT SECTION */
+#gt{background:var(--mid)}
+.gt-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:start}
+.gt-badge{display:inline-flex;align-items:center;gap:.6rem;background:var(--teal-dim);border:1px solid var(--teal-line);border-radius:6px;padding:.5rem 1rem;margin-bottom:1.5rem}
+.gt-badge-text{font-family:var(--mono);font-size:11px;color:var(--teal-lt);letter-spacing:.06em}
+.gt-desc p{color:var(--text-mid);font-size:.93rem;line-height:1.8;margin-bottom:1rem;font-weight:300}
+.gt-desc p strong{color:var(--text);font-weight:500}
+.gt-courses{display:flex;flex-direction:column;gap:.6rem}
+.gt-course{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.85rem 1rem;display:flex;align-items:flex-start;gap:.75rem}
+.gt-course-code{font-family:var(--mono);font-size:10px;color:var(--teal);background:var(--teal-dim);padding:2px 7px;border-radius:3px;white-space:nowrap;margin-top:2px}
+.gt-course-info{flex:1}
+.gt-course-title{font-size:.88rem;font-weight:500;color:var(--text);margin-bottom:.15rem}
+.gt-course-desc{font-size:.78rem;color:var(--text-dim);line-height:1.5}
+
+/* CAREER */
+#career{background:var(--dark)}
+.career-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.career-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;transition:border-color .2s,transform .2s}
+.career-card:hover{border-color:var(--teal-line);transform:translateY(-3px)}
+.career-icon{font-size:22px;margin-bottom:.85rem}
+.career-title{font-size:.95rem;font-weight:500;color:var(--text);margin-bottom:.5rem}
+.career-desc{font-size:.82rem;color:var(--text-mid);line-height:1.65;font-weight:300}
+.career-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.85rem}
+
+/* PROJECTS */
+#projects{background:var(--mid)}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.1rem}
+.project-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;display:flex;flex-direction:column;transition:border-color .2s,transform .2s}
+.project-card:hover{border-color:var(--teal-line);transform:translateY(-3px)}
+.project-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.85rem}
+.project-icon{width:38px;height:38px;background:var(--teal-dim);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--teal-lt);font-size:16px}
+.project-badge{font-family:var(--mono);font-size:10px;padding:2px 8px;border-radius:4px;border:1px solid var(--teal-line);color:var(--teal-lt)}
+.project-card h3{font-size:.95rem;font-weight:500;margin-bottom:.45rem;color:var(--text)}
+.project-card p{font-size:.82rem;color:var(--text-mid);line-height:1.65;flex:1;font-weight:300}
+.project-footer{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:1rem}
+.project-tag{font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:3px;background:rgba(255,255,255,.04);color:var(--text-dim);border:1px solid var(--border)}
+.project-link{display:inline-flex;align-items:center;gap:4px;margin-top:.7rem;font-size:.8rem;color:var(--teal-lt);text-decoration:none;font-weight:500;transition:color .2s}
+.project-link:hover{color:var(--teal)}
+
+/* REPORTS */
+#reports{background:var(--dark)}
+.reports-list{display:flex;flex-direction:column;gap:.7rem}
+.report-row{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.4rem;display:flex;align-items:center;gap:1.1rem;transition:border-color .2s;text-decoration:none}
+.report-row:hover{border-color:var(--teal-line)}
+.report-icon{width:38px;height:38px;flex-shrink:0;background:var(--teal-dim);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--teal-lt);font-size:15px}
+.report-info{flex:1}
+.report-title{font-size:.93rem;font-weight:500;color:var(--text);margin-bottom:.15rem}
+.report-meta{font-family:var(--mono);font-size:.72rem;color:var(--text-dim);letter-spacing:.03em}
+.report-arrow{color:var(--text-dim);font-size:18px}
+
+/* RESUME */
+#resume{background:var(--mid)}
+.resume-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;margin-bottom:2rem}
+.resume-col h3{font-family:var(--mono);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:1rem}
+.exp-item{margin-bottom:1.4rem}
+.exp-title{font-size:.93rem;font-weight:500;color:var(--text);margin-bottom:.12rem}
+.exp-company{font-size:.82rem;color:var(--teal-lt);margin-bottom:.12rem}
+.exp-dates{font-family:var(--mono);font-size:.72rem;color:var(--text-dim);margin-bottom:.35rem}
+.exp-desc{font-size:.8rem;color:var(--text-mid);line-height:1.6;font-weight:300}
+.skills-wrap{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1.5rem}
+.skill-chip{font-family:var(--mono);font-size:10px;padding:3px 9px;border-radius:4px;background:var(--card);border:1px solid var(--border);color:var(--text-mid)}
+.resume-dl{text-align:center;padding:2rem;background:var(--card);border:1px dashed var(--teal-line);border-radius:12px}
+.resume-dl p{font-size:.85rem;color:var(--text-mid);margin-bottom:1rem;font-weight:300}
+
+/* CONTACT */
+#contact{background:var(--dark)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.contact-info h3{font-size:1.05rem;font-weight:500;color:var(--text);margin-bottom:.65rem}
+.contact-info p{font-size:.9rem;color:var(--text-mid);line-height:1.75;font-weight:300;margin-bottom:1.5rem}
+.contact-links{display:flex;flex-direction:column;gap:.55rem}
+.contact-link{display:flex;align-items:center;gap:.75rem;font-size:.87rem;color:var(--text-mid);text-decoration:none;transition:color .2s}
+.contact-link:hover{color:var(--teal-lt)}
+.contact-link-icon{width:32px;height:32px;background:var(--card);border:1px solid var(--border);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--teal-lt);flex-shrink:0}
+.contact-form{display:flex;flex-direction:column;gap:.7rem}
+.form-group label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--text-dim);text-transform:uppercase;margin-bottom:.35rem}
+.form-group input,.form-group textarea{width:100%;background:var(--card);border:1px solid var(--border);border-radius:7px;padding:10px 13px;color:var(--text);font-family:var(--sans);font-size:.87rem;outline:none;transition:border-color .2s;resize:vertical}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--teal-line)}
+.form-group textarea{min-height:95px}
+
+/* FOOTER */
+footer{padding:1.75rem 5vw;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-left{font-family:var(--mono);font-size:11px;color:var(--text-dim);letter-spacing:.04em}
+.footer-left span{color:var(--teal)}
+.footer-right{font-size:11px;color:var(--text-dim)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .hero-photo{display:none}
+  .about-grid,.gt-grid,.resume-grid,.contact-grid{grid-template-columns:1fr}
+  .career-grid{grid-template-columns:1fr}
+  .about-stats{grid-template-columns:1fr 1fr}
+  nav{padding:0 1rem}
+  .nav-links{gap:1.25rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">soheilsameti.dev</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#gt">Georgia Tech</a></li>
+    <li><a href="#career">Career</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#reports">Reports</a></li>
+    <li><a href="#resume">Resume</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="eyebrow">Applied Data Scientist · Transportation AI</div>
+    <h1>Soheil<br><span>Sameti</span></h1>
+    <p class="hero-sub">Building AI-enabled analytics platforms and deploying machine learning systems that transform complex transportation data into decisions that move regions forward. Principal Data Analyst at the Atlanta Regional Commission, MS Analytics — Georgia Tech.</p>
+    <div class="hero-tags">
+      <span class="tag">Transportation AI</span>
+      <span class="tag">ML Deployment</span>
+      <span class="tag">Activity-Based Modeling</span>
+      <span class="tag">EPA MOVES · Emissions</span>
+      <span class="tag">Bayesian Modeling</span>
+      <span class="tag">Python · SQL · R</span>
+      <span class="tag">Databricks · Spark</span>
+      <span class="tag">Docker · Git</span>
+      <span class="tag">GIS · Spatial Analytics</span>
+    </div>
+    <div class="hero-cta">
+      <a class="btn-primary" href="#projects">View Projects</a>
+      <a class="btn-outline" href="#resume">Resume</a>
+      <a class="btn-outline" href="#contact">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-photo">
+    <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#8FA4AE" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+    <span>Photo coming soon</span>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="inner">
+    <div class="eyebrow">Background</div>
+    <h2>About Me</h2>
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <p>I'm an <strong>Applied Data Scientist and transportation analytics leader</strong> with 8+ years of experience building AI-enabled solutions, enterprise data platforms, and decision-support systems across transit operations and regional planning.</p>
+        <p>At the <strong>Atlanta Regional Commission</strong>, I serve as Principal Data Analyst — leading enterprise analytics for a 21-county metropolitan region and serving as ARC's primary emission modeler using the EPA MOVES model. My work spans Activity-Based Model modernization, deploying production ML systems for traffic volume forecasting, and building full-stack analytics platforms used daily by regional transportation planners.</p>
+        <p>My flagship project, <strong>ABMVIZ</strong>, is a TRB-cited production dashboard that transforms millions of ABM records across six forecast horizon years into 13 interactive visualization modules — publicly deployed and accessible to planners nationwide.</p>
+        <p>Prior to ARC, I delivered operational analytics and transit BI solutions at <strong>HNTB and MARTA</strong>, supporting transit operations, asset management, and service reliability across Atlanta's transit network.</p>
+        <p>I hold a <strong>Master of Science in Analytics from Georgia Institute of Technology</strong> and a Master of Urban Planning from Texas A&M University, where I received the APA Outstanding Student Award. I'm based in <strong>Marietta, GA</strong> and open to Atlanta-based and remote opportunities.</p>
+      </div>
+      <div>
+        <div class="about-stats">
+          <div class="stat-card"><div class="stat-num">8+</div><div class="stat-label">Years Experience</div></div>
+          <div class="stat-card"><div class="stat-num">21</div><div class="stat-label">County Metro Region</div></div>
+          <div class="stat-card"><div class="stat-num">TRB</div><div class="stat-label">Project Citation</div></div>
+          <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">ABM Forecast Horizons</div></div>
+          <div class="stat-card"><div class="stat-num">13</div><div class="stat-label">Dashboard Modules</div></div>
+          <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">Integrated Databases</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- GEORGIA TECH -->
+<section id="gt">
+  <div class="inner">
+    <div class="eyebrow">Education</div>
+    <h2>Georgia Tech — MS Analytics</h2>
+    <div class="gt-grid reveal">
+      <div class="gt-desc">
+        <div class="gt-badge">
+          <span style="font-size:18px">🐝</span>
+          <span class="gt-badge-text">Top-5 Nationally Ranked · Class of 2026</span>
+        </div>
+        <p>Georgia Tech's <strong>Online Master of Science in Analytics (OMS Analytics)</strong> is a top-5 nationally ranked data science and analytics program — an interdisciplinary degree jointly offered by the College of Computing, College of Engineering, and Scheller College of Business.</p>
+        <p>The program covers <strong>machine learning and AI, statistical modeling, data storage and pipelining, data visualization, optimization and simulation, and business analytics</strong> — spanning 36 credit hours across a rigorous interdisciplinary curriculum.</p>
+        <p>My <strong>Applied Analytics Practicum (ISYE 6748)</strong> was completed at the Atlanta Regional Commission, producing the ABMVIZ dashboard — a production analytics platform now cited by the Transportation Research Board and used by ARC's transportation planning division.</p>
+        <p>Completing this degree while working full-time as Principal Data Analyst at ARC required applying coursework directly to real transportation planning problems — bridging theory and production deployment in a way few purely academic programs can replicate.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem">
+          <span class="tag">Machine Learning</span>
+          <span class="tag">Statistical Modeling</span>
+          <span class="tag">Optimization & Simulation</span>
+          <span class="tag">Data Visualization</span>
+          <span class="tag">Big Data Systems</span>
+          <span class="tag">Business Analytics</span>
+          <span class="tag">AI & Knowledge Systems</span>
+          <span class="tag">Applied Analytics Practicum</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:.72rem;color:var(--teal);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.85rem">Key Coursework</div>
+        <div class="gt-courses">
+          <div class="gt-course">
+            <span class="gt-course-code">ISYE 6748</span>
+            <div class="gt-course-info">
+              <div class="gt-course-title">Applied Analytics Practicum</div>
+              <div class="gt-course-desc">Delivered ABMVIZ — a production transportation analytics platform for ARC, now TRB-cited</div>
+            </div>
+          </div>
+          <div class="gt-course">
+            <span class="gt-course-code">CSE 6242</span>
+            <div class="gt-course-info">
+              <div class="gt-course-title">Data & Visual Analytics</div>
+              <div class="gt-course-desc">Large-scale data analysis, D3.js visualization, graph analytics, and scalable systems</div>
+            </div>
+          </div>
+          <div class="gt-course">
+            <span class="gt-course-code">ISYE 6501</span>
+            <div class="gt-course-info">
+              <div class="gt-course-title">Introduction to Analytics Modeling</div>
+              <div class="gt-course-desc">Classification, regression, clustering, simulation, and optimization modeling</div>
+            </div>
+          </div>
+          <div class="gt-course">
+            <span class="gt-course-code">CS 7641</span>
+            <div class="gt-course-info">
+              <div class="gt-course-title">Machine Learning</div>
+              <div class="gt-course-desc">Supervised, unsupervised, and reinforcement learning with rigorous theoretical foundations</div>
+            </div>
+          </div>
+          <div class="gt-course">
+            <span class="gt-course-code">MGT 6203</span>
+            <div class="gt-course-info">
+              <div class="gt-course-title">Data Analytics in Business</div>
+              <div class="gt-course-desc">Translating analytical insights into business value and executive decision support</div>
+            </div>
+          </div>
+          <div class="gt-course">
+            <span class="gt-course-code">ISYE 6644</span>
+            <div class="gt-course-info">
+              <div class="gt-course-title">Simulation & Modeling</div>
+              <div class="gt-course-desc">Stochastic simulation, Monte Carlo methods, and system performance modeling</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- CAREER -->
+<section id="career">
+  <div class="inner">
+    <div class="eyebrow">Aspirations</div>
+    <h2>Career Direction</h2>
+    <p style="color:var(--text-mid);font-size:.93rem;font-weight:300;line-height:1.8;max-width:680px;margin-bottom:2.5rem">I'm an experienced transportation analytics leader actively transitioning into applied AI and data science roles — bringing rare domain depth to organizations that need both technical ML capability and transportation expertise. I'm open to roles across three target areas:</p>
+    <div class="career-grid reveal">
+
+      <div class="career-card">
+        <div class="career-icon">✈️</div>
+        <div class="career-title">Airline Operations & Decision Science</div>
+        <div class="career-desc">Transportation network optimization, crew scheduling analytics, operational efficiency, and demand forecasting translate directly from regional MPO work to airline operations. My background in origin-destination modeling, temporal demand patterns, and scenario evaluation maps naturally to airline decision science problems.</div>
+        <div class="career-tags">
+          <span class="tag">Delta Air Lines</span>
+          <span class="tag">Decision Scientist</span>
+          <span class="tag">Operations Research</span>
+          <span class="tag">Network Optimization</span>
+        </div>
+      </div>
+
+      <div class="career-card">
+        <div class="career-icon">🤖</div>
+        <div class="career-title">Transportation AI & Consulting</div>
+        <div class="career-desc">Building internal AI capabilities for transportation engineering firms — designing document intelligence tools, predictive analytics systems, and AI-enabled workflows that serve transportation planners and infrastructure clients. My transportation domain depth combined with production ML deployment experience is rare in this market.</div>
+        <div class="career-tags">
+          <span class="tag">HDR Inc.</span>
+          <span class="tag">AI Enablement</span>
+          <span class="tag">LLM Applications</span>
+          <span class="tag">ML Deployment</span>
+        </div>
+      </div>
+
+      <div class="career-card">
+        <div class="career-icon">🔐</div>
+        <div class="career-title">Federal AI & Cleared Consulting</div>
+        <div class="career-desc">As a US citizen eligible for Secret clearance, I'm positioned to contribute to federal transportation and national infrastructure AI programs. My experience building production analytics systems for a federally-designated MPO provides direct credibility with DOT, FHWA, and federal consulting clients.</div>
+        <div class="career-tags">
+          <span class="tag">Booz Allen Hamilton</span>
+          <span class="tag">Secret Clearance Eligible</span>
+          <span class="tag">Federal Transportation</span>
+          <span class="tag">Production AI</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="inner">
+    <div class="eyebrow">Work</div>
+    <h2>Projects</h2>
+    <div class="projects-grid reveal">
+
+      <div class="project-card">
+        <div class="project-top">
+          <div class="project-icon">⬡</div>
+          <span class="project-badge">Live · TRB Cited</span>
+        </div>
+        <h3>ABMVIZ — Activity-Based Model Visualization</h3>
+        <p>Production enterprise analytics dashboard transforming ARC Activity-Based Model outputs across six forecast horizon years into 13 interactive modules. Built on a 4-stage PostgreSQL ETL pipeline with hexagonal spatial normalization, 3D temporal animation, and OD desire line mapping.</p>
+        <div class="project-footer">
+          <span class="project-tag">Python</span><span class="project-tag">PostgreSQL</span><span class="project-tag">D3.js</span><span class="project-tag">Leaflet</span><span class="project-tag">R</span><span class="project-tag">GitHub Pages</span>
+        </div>
+        <a class="project-link" href="https://atlregional.github.io/ABMVIZ_MTP24TIP5" target="_blank">View Live Dashboard →</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-top">
+          <div class="project-icon">⬡</div>
+          <span class="project-badge">Production</span>
+        </div>
+        <h3>ODMAP — Origin-Destination Mobility Analytics</h3>
+        <p>Unified six major mobility databases — LODES, CTPP, REPLICA, NexGen NHTS, Teralytics, and INRIX — into a single origin-destination analytics platform. Automated API retrieval and applied K-Means clustering on county-level desire lines to surface regional travel flow patterns.</p>
+        <div class="project-footer">
+          <span class="project-tag">Python</span><span class="project-tag">REST API</span><span class="project-tag">K-Means</span><span class="project-tag">PostgreSQL</span><span class="project-tag">GIS</span>
+        </div>
+        <a class="project-link" href="#contact">Request Access →</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-top">
+          <div class="project-icon">◈</div>
+          <span class="project-badge">Research</span>
+        </div>
+        <h3>Applied ML in Travel Demand Modeling</h3>
+        <p>Benchmarked SARIMA, LSTM, Random Forest, and Bayesian Hierarchical models on TAZ-level disaggregated traffic data across multiple scenario horizons. Applied scikit-learn regression to quantify variable coefficients and identify key traffic volume drivers.</p>
+        <div class="project-footer">
+          <span class="project-tag">LSTM</span><span class="project-tag">Random Forest</span><span class="project-tag">SARIMA</span><span class="project-tag">Bayesian</span><span class="project-tag">scikit-learn</span>
+        </div>
+        <a class="project-link" href="#reports">View Reports →</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-top">
+          <div class="project-icon">◈</div>
+          <span class="project-badge">GT Practicum</span>
+        </div>
+        <h3>Large-Scale ETL — Databricks & Docker</h3>
+        <p>Designed and executed large-scale ETL pipelines using Docker containerization and Databricks with Apache Spark for distributed data processing. Implemented ML model training and inference workflows in a cloud-based distributed computing environment.</p>
+        <div class="project-footer">
+          <span class="project-tag">Docker</span><span class="project-tag">Databricks</span><span class="project-tag">Apache Spark</span><span class="project-tag">Python</span><span class="project-tag">MLOps</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- REPORTS -->
+<section id="reports">
+  <div class="inner">
+    <div class="eyebrow">Research</div>
+    <h2>Reports & Publications</h2>
+    <div class="reports-list reveal">
+      <a class="report-row" href="#" target="_blank">
+        <div class="report-icon">📄</div>
+        <div class="report-info">
+          <div class="report-title">Traffic Forecasting for 2024: SARIMA, LSTM, and Random Forest Approaches</div>
+          <div class="report-meta">Atlanta Regional Commission · June 2026 · ML Forecasting · TAZ-Level Analysis · Scenario Evaluation</div>
+        </div>
+        <span class="report-arrow">↗</span>
+      </a>
+      <a class="report-row" href="#" target="_blank">
+        <div class="report-icon">📄</div>
+        <div class="report-info">
+          <div class="report-title">Bayesian Modeling of Traffic Volume Using Hierarchical Structures</div>
+          <div class="report-meta">Georgia Institute of Technology · 2026 · Probabilistic Modeling · Spatial Heterogeneity · ELPD Evaluation</div>
+        </div>
+        <span class="report-arrow">↗</span>
+      </a>
+      <a class="report-row" href="#" target="_blank">
+        <div class="report-icon">📄</div>
+        <div class="report-info">
+          <div class="report-title">ABMVIZ: Activity-Based Model Visualization Dashboard — Practicum Final Report</div>
+          <div class="report-meta">Georgia Institute of Technology · April 2026 · Full-Stack Development · Transportation Planning · TRB Cited</div>
+        </div>
+        <span class="report-arrow">↗</span>
+      </a>
+    </div>
+    <p style="margin-top:1rem;font-size:.78rem;color:var(--text-dim);font-family:var(--mono)">* Replace href="#" with your hosted PDF URLs</p>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- RESUME -->
+<section id="resume">
+  <div class="inner">
+    <div class="eyebrow">Experience</div>
+    <h2>Resume</h2>
+    <div class="resume-grid reveal">
+      <div class="resume-col">
+        <h3>Experience</h3>
+        <div class="exp-item">
+          <div class="exp-title">Principal Data Analyst</div>
+          <div class="exp-company">Atlanta Regional Commission</div>
+          <div class="exp-dates">Nov 2022 – Present</div>
+          <div class="exp-desc">Lead enterprise analytics across a 21-county metro region. ARC's primary emission modeler (EPA MOVES). Deployed ML forecasting models and built ABMVIZ and ODMAP production platforms cited by the Transportation Research Board.</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-title">Transportation Analyst</div>
+          <div class="exp-company">HNTB & MARTA</div>
+          <div class="exp-dates">Oct 2019 – Nov 2022</div>
+          <div class="exp-desc">Delivered operational analytics, BI dashboards, and GIS applications supporting transit operations, asset management, and service reliability across Atlanta's transit network.</div>
+        </div>
+        <h3 style="margin-top:1.5rem">Education</h3>
+        <div class="exp-item">
+          <div class="exp-title">MS in Analytics</div>
+          <div class="exp-company">Georgia Institute of Technology</div>
+          <div class="exp-dates">May 2026 · Top-5 Nationally Ranked</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-title">Master of Urban Planning</div>
+          <div class="exp-company">Texas A&M University</div>
+          <div class="exp-dates">May 2019 · APA Outstanding Student Award</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-title">Bachelor of Urban Planning</div>
+          <div class="exp-company">Azad University</div>
+          <div class="exp-dates">Feb 2016</div>
+        </div>
+      </div>
+      <div class="resume-col">
+        <h3>Transportation Modeling</h3>
+        <div class="skills-wrap">
+          <span class="skill-chip">Activity-Based Modeling</span><span class="skill-chip">Travel Demand Modeling</span><span class="skill-chip">EPA MOVES</span><span class="skill-chip">Emissions Analysis</span><span class="skill-chip">TAZ-Level Analysis</span><span class="skill-chip">Transportation Conformity</span>
+        </div>
+        <h3>AI & Machine Learning</h3>
+        <div class="skills-wrap">
+          <span class="skill-chip">Python</span><span class="skill-chip">R</span><span class="skill-chip">scikit-learn</span><span class="skill-chip">LSTM</span><span class="skill-chip">Random Forest</span><span class="skill-chip">SARIMA</span><span class="skill-chip">K-Means</span><span class="skill-chip">Bayesian Hierarchical</span><span class="skill-chip">Forecasting</span><span class="skill-chip">Predictive Analytics</span>
+        </div>
+        <h3>Data Engineering & DevOps</h3>
+        <div class="skills-wrap">
+          <span class="skill-chip">SQL</span><span class="skill-chip">PostgreSQL</span><span class="skill-chip">Apache Spark</span><span class="skill-chip">Databricks</span><span class="skill-chip">Docker</span><span class="skill-chip">Git</span><span class="skill-chip">GitHub</span><span class="skill-chip">ETL Pipelines</span><span class="skill-chip">REST API</span><span class="skill-chip">Linux</span>
+        </div>
+        <h3>Visualization & GIS</h3>
+        <div class="skills-wrap">
+          <span class="skill-chip">Power BI</span><span class="skill-chip">Tableau</span><span class="skill-chip">D3.js</span><span class="skill-chip">Leaflet</span><span class="skill-chip">ArcGIS Pro</span><span class="skill-chip">PostGIS</span><span class="skill-chip">QGIS</span><span class="skill-chip">Hexagon Grid Analysis</span>
+        </div>
+      </div>
+    </div>
+    <div class="resume-dl">
+      <p>Download the full resume — includes all projects, publications, and competencies.</p>
+      <a class="btn-primary" href="#" download>Download Resume PDF</a>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="inner">
+    <div class="eyebrow">Connect</div>
+    <h2>Get in Touch</h2>
+    <div class="contact-grid reveal">
+      <div class="contact-info">
+        <h3>Open to new opportunities</h3>
+        <p>I'm currently exploring applied data science and transportation AI roles in Atlanta and remote. If you're working on something at the intersection of AI and transportation — or need a data scientist who can hit the ground running — I'd love to connect.</p>
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:soheilsameti@live.com"><div class="contact-link-icon">✉</div>soheilsameti@live.com</a>
+          <a class="contact-link" href="tel:+19794022123"><div class="contact-link-icon">📞</div>+1 (979) 402-2123</a>
+          <a class="contact-link" href="https://atlregional.github.io/ABMVIZ_MTP24TIP5" target="_blank"><div class="contact-link-icon">⬡</div>ABMVIZ Live Dashboard</a>
+          <a class="contact-link" href="#" target="_blank"><div class="contact-link-icon">in</div>LinkedIn — add your URL</a>
+          <div class="contact-link"><div class="contact-link-icon">📍</div>Marietta, GA · Open to Atlanta & Remote</div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-group"><label>Name</label><input type="text" placeholder="Your name"></div>
+        <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com"></div>
+        <div class="form-group"><label>Organization</label><input type="text" placeholder="Company or institution"></div>
+        <div class="form-group"><label>Message</label><textarea placeholder="Tell me about the opportunity or project..."></textarea></div>
+        <button class="btn-primary" style="align-self:flex-start" onclick="alert('Add Formspree or EmailJS to enable message sending — visit formspree.io for a free 5-minute setup.')">Send Message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-left">Soheil Sameti · <span>Applied Data Scientist</span> · Marietta, GA</div>
+  <div class="footer-right">soheilsameti.dev · 2026</div>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:0.08});
+reveals.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
